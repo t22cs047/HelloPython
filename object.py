@@ -1,10 +1,11 @@
 import random
+
 class Player:
     '''
     プレイヤークラスのコンストラクタ
     引数:nameプレイヤーの名前
     '''
-    def _init_(self,name):
+    def __init__(self,name):
         self._name = name
         self._wincount = 0
     
@@ -78,3 +79,23 @@ class Judge:
         elif player2Wincount > player1Wincount:
             winner = player2
         return winner
+    '''
+    じゃんけんプログラムの本体
+    '''
+    def start_janken(self, player1, player2):
+        print('【じゃんけん開始】')
+        for x in {1,2,3}:
+            print('【',x,'回戦目】')
+            winner = Judge.judge_janken(self,player1,player2)
+        if winner != None:
+            print(winner.get_name(),'の勝ち')
+            winner.notify_result(True)
+        else:
+            print('引き分け')
+        print('¥n【じゃんけん終了】')
+        finalWinner = Judge.judge_finalwinner(self,player1,player2)
+        print(player1.get_wincount(),'対',player2.get_wincount(),'で')
+        if finalWinner != None:
+            print(finalWinner.get_name(),'の勝ちです')
+        else:
+            print('引き分けです') 
